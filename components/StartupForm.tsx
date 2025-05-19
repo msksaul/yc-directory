@@ -10,6 +10,7 @@ import { formSchema } from '@/lib/validation'
 import { z } from 'zod'
 import { useToast } from '@/hooks/use-toast'
 import { useRouter } from 'next/navigation'
+import { createPitch } from '@/lib/actions'
 
 const StartupForm = () => {
 
@@ -30,16 +31,15 @@ const StartupForm = () => {
 
       await formSchema.parseAsync(formValues)
 
-      //const result = await createDiffieHellman(prevState, formDAta, pitch)
+      const result = await createPitch(prevState, formData, pitch)
 
       if(result.status === 'SUCCESS') {
         toast({
             title: 'Sucess',
-            description: 'Your startup pitch has been created successfully',
-            
+            description: 'Your startup pitch has been created successfully'
           })
 
-        router.push(`/startup/${result.id}`)
+        router.push(`/startup/${result._id}`)
       }
       return result
     } catch (error) {
