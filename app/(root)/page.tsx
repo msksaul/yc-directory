@@ -29,7 +29,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ q
 
         <ul className='mt-7 card_grid'>
           {posts?.length > 0 ? (
-            posts.map((post: StartupCardType, index: number) => (
+            posts.map((post: StartupCardType) => (
               <StartupCard key={post?._id} post={post}/>
             ))
           ): <p className='no results'>No startups found</p>}
