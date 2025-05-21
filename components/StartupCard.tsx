@@ -12,7 +12,7 @@ export type StartupCardType = Omit<Startup, 'author'> & { author?: Author}
 const StartupCard = ({post}: {post: StartupCardType}) => {
 
   const { _createdAt, views, author, title, category, _id, image, description } = post
-
+  console.log(author)
   return (
     <li className='startup-card group'>
       <div className='flex-between'>
@@ -27,14 +27,14 @@ const StartupCard = ({post}: {post: StartupCardType}) => {
 
       <div className='flex-between mt-5 gap-5'>
         <div className='flex-1'>
-          <Link href={`/user/${author?.id}`}>
+          <Link href={`/user/${author?._id}`}>
             <p className='text-16-medium line-clamp-1'>{author?.name}</p>
           </Link>
           <Link href={`/startup/${_id}`}>
             <h3 className='text-26-semibold line-clamp-1'>{title}</h3>
           </Link>
         </div>
-        <Link href={`/user/${author?.id}`}>
+        <Link href={`/user/${author?._id}`}>
           <Image src={author?.image!} alt={author?.name!} width={48} height={48} className='rounded-full'/>
         </Link>
       </div>
