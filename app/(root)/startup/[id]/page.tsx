@@ -19,8 +19,8 @@ const Startup = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id
 
   const [post, { select: editorStartups }] = await Promise.all([
-    await client.fetch(STARTUP_BY_ID_QUERY, { id }),
-    await client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: 'editor-picks' })
+    client.fetch(STARTUP_BY_ID_QUERY, { id }),
+    client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: 'editor-picks' }),
   ])
 
   if(!post) return notFound()
@@ -65,7 +65,7 @@ const Startup = async ({ params }: { params: Promise<{ id: string }> }) => {
 
         <hr className='divider'/>
       
-        {editorStartups?.lenght > 0 && (
+        {editorStartups?.length > 0 && (
           <div className='max-w-4xl mx-auto'>
             <p className='text-30-semibold'>Editor Picks</p>
 

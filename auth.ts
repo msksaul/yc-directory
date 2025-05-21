@@ -4,11 +4,11 @@ import GitHub from "next-auth/providers/github"
 import { client } from './sanity/lib/client'
 import { AUTHOR_BY_GITHUB_ID_QUERY } from './sanity/lib/queries'
 import { writeClient } from './sanity/lib/write-client'
-import "next-auth/jwt"
- 
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [GitHub],
   callbacks: {
+    // @ts-ignore
     async signIn({ user: { name, email, image}, profile: { id, login, bio } }) {
       const existingUser = await client.withConfig({ useCdn: false }).fetch(AUTHOR_BY_GITHUB_ID_QUERY, { id })
 
@@ -43,14 +43,3 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   }
 })
 
-declare module "next-auth" {
-  interface Session {
-    accessToken?: string
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    accessToken?: string
-  }
-}

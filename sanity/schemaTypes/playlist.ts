@@ -6,14 +6,14 @@ export const playlist = defineType({
   type: "document",
   fields: [
     defineField({
-      name: "title",
+      name: "name",
       type: "string",
     }),
     defineField({
       name: "slug",
       type: "slug",
       options: {
-        source: "title",
+        source: "name",
       },
     }),
     defineField({
